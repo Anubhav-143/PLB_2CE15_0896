@@ -161,8 +161,8 @@ class PageReplacement:
                 if len(frames) < frame_count:
                     frames.append(page)
                 else:
-                    # Find least recently used page
-                    lru_page = min(frames, key=lambda x: recent_use.get(x, -1))
+                    # Find least recently used page (minimum timestamp)
+                    lru_page = min(frames, key=lambda x: recent_use[x])
                     frames.remove(lru_page)
                     frames.append(page)
             else:
@@ -348,7 +348,11 @@ class DiskScheduling:
     
     @staticmethod
     def cscan(requests, head, disk_size):
-        """C-SCAN (Circular SCAN) Disk Scheduling"""
+        """C-SCAN (Circular SCAN) Disk Scheduling
+        
+        In C-SCAN, the head moves from one end to the other servicing requests,
+        then returns to the beginning without servicing requests on return.
+        """
         seek_count = 0
         current = head
         sequence = [head]
@@ -368,9 +372,10 @@ class DiskScheduling:
             current = disk_size - 1
             sequence.append(current)
         
-        # Jump to beginning
+        # Return to beginning (circular jump) and service remaining requests
         if left:
-            seek_count += disk_size - 1
+            # In C-SCAN, we jump back to start - count the full movement
+            seek_count += current  # Distance from current to 0
             current = 0
             sequence.append(current)
             
