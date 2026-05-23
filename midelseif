@@ -1,0 +1,19 @@
+int(input("Enter your choice (1 for volume of cube, 2 for volume of cuboid, 3 for volume of cylinder): ="))
+if a==1:
+    l = int(input("Enter your length = "))
+    volume = l*l*l
+    print("Volume of cube = ",volume)
+elif a ==2:
+    print("Enter length, breadth and height")
+    l= int(input("Enter your length = "))
+    b= int(input("Enter your breadth = "))
+    h= int(input("Enter your height = "))
+    volume = l*b*h
+    print("The volume of cuboid = ",volume)
+elif a ==3:
+    r = int(input("Enter your radius = "))
+    h = int(input("enter your height = "))
+    volume = 3.14*r*r*h
+    print("Volume of cylinder = ",volume)
+else :
+    print("Invalid choice")

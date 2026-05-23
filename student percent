@@ -1,0 +1,9 @@
+a= int(input("Enter your percent ="))
+if a>=60:
+    print("1st division")
+elif a>50:
+    print("2nd division")
+elif a>40:
+    print("3rd division")
+else:
+    print("You failed")

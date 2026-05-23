@@ -1,0 +1,3 @@
+a = "Grapefruit"
+for x in a:
+    print(x)
